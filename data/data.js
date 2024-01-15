@@ -69,6 +69,7 @@ const courses = [
     title: 'Blockchain Foundations',
     description:
       "Explore the core concepts of blockchain technology in this comprehensive course designed for beginners and intermediate learners. Understand blockchain's history, key technologies, and real-world applications. Delve into cryptocurrencies, smart contracts, and the latest trends shaping this transformative technology. Ideal for students, professionals, and enthusiasts, this course requires no prior blockchain or programming experience.",
+    imageUrl: 'blockchain-course.jpeg',
     teacherId: 't1',
     startDate: '2024-02-12',
     endDate: '2024-05-24',
@@ -81,6 +82,7 @@ const courses = [
     title: 'Cloud Computing Essentials',
     description:
       'Embark on a journey through the fundamentals of cloud computing in this engaging course. Gain insights into the architecture, services, and deployment models of cloud computing. Explore key platforms like AWS, Azure, and Google Cloud. Understand cloud security, scalability, and best practices. This course is perfect for beginners and intermediate learners, with no prior cloud computing experience required.',
+    imageUrl: 'cloud-computing-course.jpeg',
     teacherId: 't2',
     startDate: '2023-08-14',
     endDate: '2024-03-01',
@@ -93,6 +95,7 @@ const courses = [
     title: 'Data Science Fundamentals',
     description:
       'Dive into the dynamic world of data science with this comprehensive course. Learn about data manipulation, statistical analysis, predictive modeling, and machine learning. Explore tools and languages such as Python, R, SQL, and Tableau. Gain practical skills through hands-on projects and real-world case studies. Suitable for beginners and those looking to strengthen their data science foundations.',
+    imageUrl: 'data-science-course.jpg',
     teacherId: 't1',
     startDate: '2023-02-13',
     endDate: '2024-02-02',
@@ -105,6 +108,7 @@ const courses = [
     title: 'UX Design',
     description:
       'Immerse yourself in the world of UX Design with this engaging and comprehensive course. Learn the fundamentals of user-centered design, including research, prototyping, usability testing, and interface design. Understand the principles of creating effective and delightful user experiences. Explore real-world case studies and apply your skills in hands-on projects. Suitable for beginners and aspiring designers looking to build a strong foundation in UX principles.',
+    imageUrl: 'ux-design-course.jpg',
     teacherId: 't3',
     startDate: '2024-02-12',
     endDate: '2024-05-24',
@@ -117,6 +121,7 @@ const courses = [
     title: 'Cybersecurity Fundamentals',
     description:
       'Explore the critical field of cybersecurity with this in-depth course. Learn about the latest security threats, defense mechanisms, and industry best practices. Topics include network security, ethical hacking, cryptography, risk management, and incident response. Gain practical skills through hands-on exercises and simulations. Ideal for IT professionals, system administrators, and anyone interested in building a strong foundation in cybersecurity.',
+    imageUrl: 'cybersecurity-course.jpg',
     teacherId: 't3',
     startDate: '2024-02-12',
     endDate: '2024-08-23',
@@ -129,6 +134,7 @@ const courses = [
     title: 'Social Media Marketing Mastery',
     description:
       'Embark on a comprehensive journey into the world of social media marketing. This course covers strategies for engaging with audiences, creating effective content, and leveraging various social media platforms like Facebook, Instagram, Twitter, and LinkedIn. Learn about analytics, SEO, and digital advertising to boost online presence. Ideal for marketers, business owners, and anyone interested in mastering social media marketing techniques.',
+    imageUrl: 'social-media-marketing-course.jpg',
     teacherId: 't4',
     startDate: '2024-02-12',
     endDate: '2024-08-23',
