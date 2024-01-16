@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0"
     />
-    <title>Westcoast Education | Log In</title>
+    <title>Westcoast Education | Registration</title>
     <script
       type="module"
       src="./scripts/lib/app.js"
@@ -29,9 +29,45 @@
     </header>
 
     <main>
-      <h2 class="page-title">Log in</h2>
+      <h2 class="page-title">Register new account</h2>
       <div class="form-container">
-        <form id="login-form">
+        <form id="register-form">
+          <div class="form-control">
+            <label for="firstName">First Name</label>
+            <input
+              type="text"
+              name="firstName"
+              id="firstName"
+              placeholder="Enter your first name here"
+            />
+          </div>
+          <div class="form-control">
+            <label for="lastName">Last Name</label>
+            <input
+              type="text"
+              name="lastName"
+              id="lastName"
+              placeholder="Enter your last name here"
+            />
+          </div>
+          <div class="form-control">
+            <label for="billingAddress">Billing Address</label>
+            <input
+              type="text"
+              name="billingAddress"
+              id="billingAddress"
+              placeholder="Enter your billing address here"
+            />
+          </div>
+          <div class="form-control">
+            <label for="phoneNumber">Phone Number</label>
+            <input
+              type="text"
+              name="phoneNumber"
+              id="phoneNumber"
+              placeholder="Enter your phone number here"
+            />
+          </div>
           <div class="form-control">
             <label for="email">Email</label>
             <input
@@ -54,9 +90,9 @@
         <div class="form-control">
           <button
             type="submit"
-            id="btn-login"
+            id="btn-register"
           >
-            Log in
+            Register
           </button>
         </div>
       </div>

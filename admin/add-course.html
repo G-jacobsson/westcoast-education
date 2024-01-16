@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Westcoast Education | Registration</title>
+    <script
+      type="module"
+      src="./scripts/lib/app.js"
+      defer
+    ></script>
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <h1><a href="/index.html">Westcoast Education</a></h1>
+        <nav>
+          <ul>
+            <li><a href="/pages/courses.html">Courses</a></li>
+            <li><a href="/pages/register.html">Register</a></li>
+            <li><a href="/pages/admin.html">Admin</a></li>
+            <li><a href="/pages/login.html">Log in</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <h2 class="page-title">Add new course</h2>
+      <div class="form-container">
+        <form id="addCourse-form">
+          <div class="form-control">
+            <label for="title">Title</label>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              placeholder="Enter course title here"
+            />
+          </div>
+          <div class="form-control">
+            <label for="teacher">Teacher</label>
+            <input
+              type="text"
+              name="teacher"
+              id="teacher"
+              placeholder="Enter course teacher's name here"
+            />
+          </div>
+          <div class="form-control">
+            <label for="start-date">Start Date</label>
+            <input
+              type="text"
+              name="start-date"
+              id="start-date"
+              placeholder="Enter course start date here"
+            />
+          </div>
+          <div class="form-control">
+            <label for="end-date">End Date</label>
+            <input
+              type="text"
+              name="end-date"
+              id="end-date"
+              placeholder="Enter course end date here"
+            />
+          </div>
+          <div class="form-control">
+            <label for="description">Description</label>
+            <input
+              type="text"
+              name="description"
+              id="description"
+              placeholder="Enter course description here"
+            />
+          </div>
+        </form>
+        <div class="form-control">
+          <button
+            type="submit"
+            id="btn-addCourse"
+          >
+            Add course
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-container">
+        <p>&copy; All rights reserved to Westcoast Education</p>
+      </div>
+    </footer>
+  </body>
+</html>

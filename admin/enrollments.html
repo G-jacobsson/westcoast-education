@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0"
     />
-    <title>Westcoast Education | Our courses</title>
+    <title>Westcoast Education | Enrollments</title>
     <script
       type="module"
       src="./scripts/lib/app.js"
@@ -29,13 +29,31 @@
     </header>
 
     <main>
-      <section>
-        <h2 class="page-title">Our courses</h2>
-        <div
-          id="courses-cards"
-          class="courses-grid"
-        ></div>
-      </section>
+      <h2 class="page-title">Enrollments</h2>
+      <div class="search-container">
+        <label for="searchInput">Search</label>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Enter course title here"
+        />
+        <select
+          name="searchFilter"
+          id="statusFilter"
+        >
+          <option value="all">All</option>
+          <option value="active">Active</option>
+          <option value="notStarted">Not Started</option>
+        </select>
+        <button
+          type="submit"
+          id="btn-search"
+        >
+          Search
+        </button>
+      </div>
+
+      <div id="results-container"></div>
     </main>
 
     <footer>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Westcoast Education | Admin Data Management</title>
+    <script
+      type="module"
+      src="./scripts/lib/app.js"
+      defer
+    ></script>
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <h1><a href="/index.html">Westcoast Education</a></h1>
+        <nav>
+          <ul>
+            <li><a href="/pages/courses.html">Courses</a></li>
+            <li><a href="/pages/register.html">Register</a></li>
+            <li><a href="/pages/admin.html">Admin</a></li>
+            <li><a href="/pages/login.html">Log in</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <h2 class="page-title">Admin Data Management</h2>
+
+      <div id="data-options">
+        <input
+          type="radio"
+          id="students"
+          name="dataOption"
+          value="students"
+          checked
+        />
+        <label for="students">Students</label>
+
+        <input
+          type="radio"
+          id="teachers"
+          name="dataOption"
+          value="teachers"
+        />
+        <label for="teachers">Teachers</label>
+
+        <input
+          type="radio"
+          id="courses"
+          name="dataOption"
+          value="courses"
+        />
+        <label for="courses">Courses</label>
+
+        <button id="edit-button">Edit</button>
+      </div>
+
+      <!-- Container for Dynamic Data Editing Forms -->
+      <div id="data-container">
+        <!-- Dynamic forms will be loaded here based on the selected option -->
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-container">
+        <p>&copy; All rights reserved to Westcoast Education</p>
+      </div>
+    </footer>
+  </body>
+</html>
