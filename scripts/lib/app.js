@@ -1,6 +1,5 @@
-const state = {
-  currentPage: location.pathname,
-};
+import { state } from '../utilities/config.js';
+import HttpClient from './http.js';
 
 const initApp = () => {
   switch (state.currentPage) {
@@ -12,15 +11,10 @@ const initApp = () => {
 
 const listPopularCourses = async () => {
   try {
-    const url = 'http://localhost:3000/courses';
-    const response = await fetch(url);
-
-    if (response.ok) {
-      const courses = await response.json();
-      displayPopularCourses(courses);
-    } else {
-      throw new Error(`${response.status} - ${response.statusText}`);
-    }
+    const http = new HttpClient();
+    const result = await http.fetchData('courses');
+    console.log(result);
+    displayPopularCourses(result);
   } catch (error) {
     throw new Error('Error getting courses data:', error.message);
   }
