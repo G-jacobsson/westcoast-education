@@ -4,9 +4,10 @@ export default class HttpClient {
   constructor() {
     this.baseUrl = settings.BASE_URL;
   }
-  async get(endpoint) {
+  async get(endpoints, id) {
     try {
-      const url = `${this.baseUrl}${settings.ENDPOINTS[endpoint]}`;
+      const endpoint = settings.ENDPOINTS[endpoints];
+      const url = `${this.baseUrl}${endpoint}${id}`;
       const response = await fetch(url);
 
       if (response.ok) {
