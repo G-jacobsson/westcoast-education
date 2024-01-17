@@ -75,6 +75,7 @@ const courses = [
     endDate: '2024-05-24',
     prerequisites:
       'No prior experience in blockchain or programming is required. A basic understanding of computer science and a curiosity about emerging technologies will enhance your learning experience.',
+    cost: 2000,
     rating: 4,
     status: 'Open for Enrollment',
   },
@@ -89,6 +90,7 @@ const courses = [
     endDate: '2024-03-01',
     prerequisites:
       'Basic understanding of IT concepts and familiarity with internet usage. Prior knowledge of computer networks and operating systems is helpful but not required.',
+    cost: 1500,
     rating: 3.5,
     status: 'Closed for Enrollment',
   },
@@ -103,6 +105,7 @@ const courses = [
     endDate: '2024-02-02',
     prerequisites:
       'Basic proficiency in programming (any language) and a good understanding of high school level mathematics, especially algebra and statistics.',
+    cost: 2000,
     rating: 4.5,
     status: 'Closed for Enrollment',
   },
@@ -117,6 +120,7 @@ const courses = [
     endDate: '2024-05-24',
     prerequisites:
       'No prior experience in design is required. A keen interest in understanding user behavior and good communication skills are advantageous.',
+    cost: 1500,
     rating: 5,
     status: 'Open for Enrollment',
   },
@@ -131,6 +135,7 @@ const courses = [
     endDate: '2024-08-23',
     prerequisites:
       'Basic knowledge of computer networks and operating systems is recommended. Familiarity with programming concepts can be helpful but is not mandatory.',
+    cost: 1500,
     rating: 3,
     status: 'Open for Enrollment',
   },
@@ -145,6 +150,7 @@ const courses = [
     endDate: '2024-08-23',
     prerequisites:
       'Basic computer literacy and familiarity with social media platforms are required. Prior marketing experience is helpful but not essential.',
+    cost: 1000,
     rating: 3.5,
     status: 'Open for Enrollment',
   },
