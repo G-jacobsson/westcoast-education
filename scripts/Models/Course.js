@@ -2,14 +2,16 @@ import { settings } from '../utilities/config.js';
 
 export default class Course {
   #id = 0;
+  #imageUrl = '';
   #title = '';
   #description = '';
   #startDate = '';
   #endDate = '';
   #cost = '';
 
-  constructor(id, title, description, startDate, endDate, cost) {
+  constructor(id, imageUrl, title, description, startDate, endDate, cost) {
     this.#id = id;
+    this.#imageUrl = imageUrl;
     this.#title = title;
     this.#description = description;
     this.#startDate = startDate;
@@ -19,6 +21,9 @@ export default class Course {
 
   get id() {
     return this.#id;
+  }
+  get imageUrl() {
+    return this.#imageUrl;
   }
   get title() {
     return this.#title;

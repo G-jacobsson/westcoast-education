@@ -11,7 +11,7 @@ const initApp = () => {
     case '/pages/courses.html':
       // listAllCourses();
       console.log('vi är i courses delen nu');
-      findCourse(101);
+      findCourse(102);
       break;
   }
 };
@@ -19,7 +19,7 @@ const initApp = () => {
 const listPopularCourses = async () => {
   try {
     const http = new HttpClient();
-    const result = await http.get('courses');
+    const result = await http.get('courses', '');
     console.log(result);
     displayPopularCourses(result);
   } catch (error) {
@@ -55,10 +55,19 @@ const displayPopularCourses = (courses) => {
 
 const listAllCourses = async () => {};
 const displayAllCourses = () => {};
-const findCourse = async (id) => {
+const findCourse = async () => {
   try {
     const http = new HttpClient();
-    const course = await http.get('courses', `/${id}`);
+    const result = await http.get('courses', `/${id}`);
+    const course = new Course(
+      result.id,
+      result.imageUrl,
+      result.title,
+      result.description,
+      result.startDate,
+      result.endDate,
+      result.cost
+    );
     console.log(course);
 
     return course;
