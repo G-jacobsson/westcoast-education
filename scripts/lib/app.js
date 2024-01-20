@@ -26,13 +26,15 @@ const listPopularCourses = async () => {
     const result = await http.get('courses', '');
     console.log(result);
     displayPopularCourses(result);
+    const backgroundImage = courseOverlay();
+    document.querySelector('#index-container').appendChild(backgroundImage);
   } catch (error) {
     throw new Error('Error getting courses data:', error.message);
   }
 };
 
 const displayPopularCourses = (courses) => {
-  const spotlightDiv = document.getElementById('spotlight-courses');
+  const spotlightDiv = document.querySelector('#spotlight-courses');
 
   const popularCourses = courses
     .sort((a, b) => b.rating - a.rating)
@@ -94,7 +96,10 @@ const displayAllCourses = async () => {
 
       const card = document.createElement('div');
       card.classList.add('card');
-      card.style.backgroundColor = 'aqua';
+      card.style.backgroundColor = '#B2B2B2';
+      card.style.padding = '10px';
+      card.style.margin = '10px';
+      card.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
 
       const image = document.createElement('img');
       image.src = course.imageUrl;
@@ -132,6 +137,9 @@ const displayAllCourses = async () => {
       cost.classList.add('course-text');
       bodyText.appendChild(cost);
 
+      const backgroundImage = courseOverlay();
+      document.querySelector('#course-container').appendChild(backgroundImage);
+
       document.querySelector('#card-container').appendChild(card);
     });
   } catch (error) {
@@ -164,7 +172,28 @@ const showCourseDetails = async () => {
   console.log(courseId);
 
   const course = await findCourse(courseId);
+  const backgroundImage = courseOverlay();
+  document
+    .querySelector('#course-details-container')
+    .appendChild(backgroundImage);
   console.log(course);
+};
+
+const courseOverlay = () => {
+  const overlay = document.createElement('div');
+  overlay.style.backgroundImage = "url('/assets/images/background-image.jpg')";
+  overlay.style.backgroundSize = 'cover';
+  overlay.style.backgroundPosition = 'center';
+  overlay.style.backgroundRepeat = 'no-repeat';
+  overlay.style.height = '100vh';
+  overlay.style.width = '100vw';
+  overlay.style.position = 'fixed';
+  overlay.style.top = '0';
+  overlay.style.left = '0';
+  overlay.style.zIndex = '-1';
+  overlay.style.opacity = '0.3';
+
+  return overlay;
 };
 
 document.addEventListener('DOMContentLoaded', initApp);
