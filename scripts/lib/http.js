@@ -7,7 +7,7 @@ export default class HttpClient {
   async get(endpoints, id) {
     try {
       const endpoint = settings.ENDPOINTS[endpoints];
-      const url = `${this.baseUrl}${endpoint}${id}`;
+      const url = `${this.baseUrl}${endpoint}${id ? `${id}` : ''}`;
       const response = await fetch(url);
 
       if (response.ok) {

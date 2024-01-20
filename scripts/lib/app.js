@@ -9,9 +9,9 @@ const initApp = () => {
       listPopularCourses();
       break;
     case '/pages/courses.html':
-      // listAllCourses();
+      displayAllCourses();
       console.log('vi är i courses delen nu');
-      findCourse(102);
+      console.log(state);
       break;
   }
 };
@@ -53,9 +53,81 @@ const displayPopularCourses = (courses) => {
   });
 };
 
-const listAllCourses = async () => {};
-const displayAllCourses = () => {};
-const findCourse = async () => {
+const listAllCourses = async () => {
+  try {
+    const http = new HttpClient();
+    const result = await http.get('courses', '');
+    console.log(result);
+
+    const courses = result.map((course) => {
+      console.log(course);
+      return new Course(
+        course.id,
+        course.imageUrl,
+        course.title,
+        course.startDate,
+        course.endDate,
+        course.cost
+      );
+    });
+    return courses;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const displayAllCourses = async () => {
+  try {
+    const courses = await listAllCourses();
+    console.log(courses);
+
+    courses.forEach((course) => {
+      const card = document.createElement('div');
+      card.classList.add('card');
+      card.style.backgroundColor = 'aqua';
+
+      const image = document.createElement('img');
+      image.src = course.imageUrl;
+      image.setAttribute('alt', course.title);
+      image.style.width = '50%';
+      card.appendChild(image);
+
+      const body = document.createElement('div');
+      card.appendChild(body);
+
+      const title = document.createElement('h4');
+      title.textContent = course.title;
+      body.appendChild(title);
+
+      const bodyText = document.createElement('p');
+      title.appendChild(bodyText);
+
+      const startDate = document.createElement('small');
+      startDate.textContent = `Start date: ${course.startDate}`;
+      startDate.classList.add('course-text');
+      bodyText.appendChild(startDate);
+
+      const endDate = document.createElement('small');
+      endDate.textContent = `End date: ${course.endDate}`;
+      endDate.classList.add('course-text');
+      bodyText.appendChild(endDate);
+
+      const cost = document.createElement('small');
+      cost.textContent = `Price: ${new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+      }).format(course.cost)}`;
+      cost.classList.add('course-text');
+      bodyText.appendChild(cost);
+
+      document.querySelector('#card-container').appendChild(card);
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
+const findCourse = async (id) => {
   try {
     const http = new HttpClient();
     const result = await http.get('courses', `/${id}`);
