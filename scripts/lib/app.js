@@ -13,6 +13,10 @@ const initApp = () => {
       console.log('vi är i courses delen nu');
       console.log(state);
       break;
+    case '/pages/course-details.html':
+      showCourseDetails();
+      console.log('Vi är i details nu');
+      break;
   }
 };
 
@@ -42,7 +46,10 @@ const displayPopularCourses = (courses) => {
       const img = document.createElement('img');
       img.src = course.imageUrl;
       img.style.width = '200px';
-      courseDiv.appendChild(img);
+      const link = document.createElement('a');
+      link.href = `/pages/course-details.html?id=${course.id}`;
+      link.appendChild(img);
+      courseDiv.appendChild(link);
     }
 
     const title = document.createElement('h4');
@@ -82,6 +89,9 @@ const displayAllCourses = async () => {
     console.log(courses);
 
     courses.forEach((course) => {
+      const link = document.createElement('a');
+      link.href = `/pages/course-details.html?id=${course.id}`;
+
       const card = document.createElement('div');
       card.classList.add('card');
       card.style.backgroundColor = 'aqua';
@@ -90,7 +100,9 @@ const displayAllCourses = async () => {
       image.src = course.imageUrl;
       image.setAttribute('alt', course.title);
       image.style.width = '50%';
-      card.appendChild(image);
+
+      link.appendChild(image);
+      card.appendChild(link);
 
       const body = document.createElement('div');
       card.appendChild(body);
@@ -135,12 +147,11 @@ const findCourse = async (id) => {
       result.id,
       result.imageUrl,
       result.title,
-      result.description,
       result.startDate,
       result.endDate,
-      result.cost
+      result.cost,
+      result.description
     );
-    console.log(course);
 
     return course;
   } catch (error) {
@@ -148,6 +159,12 @@ const findCourse = async (id) => {
     throw error;
   }
 };
-const showCourseDetails = async () => {};
+const showCourseDetails = async () => {
+  const courseId = location.search.split('=')[1];
+  console.log(courseId);
+
+  const course = await findCourse(courseId);
+  console.log(course);
+};
 
 document.addEventListener('DOMContentLoaded', initApp);
