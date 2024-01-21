@@ -226,7 +226,13 @@ const saveUser = async (user) => {
   const http = new HttpClient();
   await http.add(user, 'users');
 
-  location.href('/');
+  const usersData = JSON.parse(localStorage.getItem('usersData')) || {
+    users: [],
+  };
+  usersData.users.push(user);
+  localStorage.setItem('usersData', JSON.stringify(usersData));
+
+  location.href = '/';
 };
 
 const initializeRegisterPage = () => {
@@ -236,6 +242,36 @@ const initializeRegisterPage = () => {
     console.log('Register form event listener attached');
   } else {
     console.error('Register form not found');
+  }
+};
+
+const initializeLoginPage = () => {
+  const loginForm = document.querySelector('#login-form');
+  if (loginForm) {
+    loginForm.addEventListener('submit', handleLogin);
+    console.log('Login form event listener attached');
+  } else {
+    console.log('Login form not found');
+  }
+};
+
+const handleLogin = (e) => {
+  e.preventDefault();
+
+  const email = e.target.email.value;
+  const password = e.target.password.value;
+
+  const usersData = JSON.parse(localStorage.getItem('usersData')) || {
+    users: [],
+  };
+  console.log('Users in localStorage:', usersData.users);
+  const user = usersData.users.find(
+    (u) => u.email === email && u.password === password
+  );
+  if (user) {
+    console.log('Login Successful');
+  } else {
+    alert('Invalid email or password');
   }
 };
 
