@@ -9,5 +9,13 @@ export const settings = {
     teachers: '/teachers',
     courses: '/courses',
     enrollments: '/enrollments',
+    users: '/users',
   },
+};
+
+export const formInputToJson = (formInput) => {
+  const inputData = Object.fromEntries(formInput.entries());
+  console.log(inputData);
+
+  return inputData;
 };

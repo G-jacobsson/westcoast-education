@@ -298,3 +298,5 @@ const enrollments = [
     ],
   },
 ];
+
+const users = [];

@@ -26,4 +26,30 @@ export default class HttpClient {
     console.log(`${endpoint}:`, data);
     return data;
   }
+
+  async add(inputData, endpoint) {
+    try {
+      console.log(inputData);
+      const endpoints = settings.ENDPOINTS[endpoint];
+      const url = `${this.baseUrl}/${endpoint}`;
+      console.log(`Sending POST request to ${url}`);
+
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(inputData),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        return result;
+      } else {
+        throw new Error(`${response.status} ${response.statusText}`);
+      }
+    } catch (error) {
+      throw new Error(`Ett fel inträffade i add metoden: ${error}`);
+    }
+  }
 }

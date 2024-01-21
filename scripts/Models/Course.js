@@ -8,8 +8,18 @@ export default class Course {
   #endDate = '';
   #cost = '';
   #description = '';
+  #rating = 5;
 
-  constructor(id, imageUrl, title, startDate, endDate, cost, description = '') {
+  constructor(
+    id,
+    imageUrl,
+    title,
+    startDate,
+    endDate,
+    cost,
+    description,
+    rating
+  ) {
     this.#id = id;
     this.#imageUrl = imageUrl;
     this.#title = title;
@@ -17,6 +27,7 @@ export default class Course {
     this.#endDate = endDate;
     this.#cost = cost;
     this.#description = description;
+    this.#rating = rating;
   }
 
   get id() {
@@ -39,5 +50,8 @@ export default class Course {
   }
   get description() {
     return this.#description;
+  }
+  get rating() {
+    return this.#rating.toFixed(1) + ' / 5';
   }
 }

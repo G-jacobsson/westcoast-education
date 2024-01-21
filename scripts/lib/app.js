@@ -1,6 +1,8 @@
 import { state } from '../utilities/config.js';
+import { settings } from '../utilities/config.js';
 import Course from '../Models/Course.js';
-import HttpClient from './http.js';
+import HttpClient from './Http.js';
+import { formInputToJson } from '../utilities/config.js';
 
 const initApp = () => {
   switch (state.currentPage) {
@@ -16,6 +18,14 @@ const initApp = () => {
     case '/pages/course-details.html':
       showCourseDetails();
       console.log('Vi är i details nu');
+      break;
+    case '/pages/register.html':
+      console.log('vi är i register delen nu');
+      initializeRegisterPage();
+      break;
+    case '/pages/login.html':
+      console.log('Vi är i login delen nu');
+      initializeLoginPage();
       break;
   }
 };
@@ -158,7 +168,8 @@ const findCourse = async (id) => {
       result.startDate,
       result.endDate,
       result.cost,
-      result.description
+      result.description,
+      result.rating
     );
 
     return course;
@@ -194,6 +205,38 @@ const courseOverlay = () => {
   overlay.style.opacity = '0.3';
 
   return overlay;
+};
+
+const addUser = async (e) => {
+  console.log('addUser triggered');
+  e.preventDefault();
+
+  const user = new FormData(e.target);
+  const userObj = formInputToJson(user);
+  try {
+    await saveUser(userObj);
+    console.log(userObj);
+  } catch (error) {
+    console.log('Error saving user:', error);
+  }
+};
+
+const saveUser = async (user) => {
+  // const url = `settings.${BASE_URL}`;
+  const http = new HttpClient();
+  await http.add(user, 'users');
+
+  location.href('/');
+};
+
+const initializeRegisterPage = () => {
+  const registerForm = document.querySelector('#register-form');
+  if (registerForm) {
+    registerForm.addEventListener('submit', addUser);
+    console.log('Register form event listener attached');
+  } else {
+    console.error('Register form not found');
+  }
 };
 
 document.addEventListener('DOMContentLoaded', initApp);
