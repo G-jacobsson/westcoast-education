@@ -1,5 +1,4 @@
 import { state } from '../utilities/config.js';
-import { settings } from '../utilities/config.js';
 import Course from '../Models/Course.js';
 import HttpClient from './Http.js';
 import { formInputToJson } from '../utilities/config.js';
@@ -273,7 +272,8 @@ const handleLogin = (e) => {
     (u) => u.email === email && u.password === password
   );
   if (user) {
-    console.log('Login Successful');
+    location.href = '/pages/courses.html';
+    alert('Login Successful');
   } else {
     alert('Invalid email or password');
   }
