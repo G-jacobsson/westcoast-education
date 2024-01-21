@@ -237,6 +237,8 @@ const saveUser = async (user) => {
 
 const initializeRegisterPage = () => {
   const registerForm = document.querySelector('#register-form');
+  const backgroundImage = courseOverlay();
+  document.querySelector('.form-container').appendChild(backgroundImage);
   if (registerForm) {
     registerForm.addEventListener('submit', addUser);
     console.log('Register form event listener attached');
@@ -247,6 +249,8 @@ const initializeRegisterPage = () => {
 
 const initializeLoginPage = () => {
   const loginForm = document.querySelector('#login-form');
+  const backgroundImage = courseOverlay();
+  document.querySelector('.form-container').appendChild(backgroundImage);
   if (loginForm) {
     loginForm.addEventListener('submit', handleLogin);
     console.log('Login form event listener attached');
