@@ -148,6 +148,7 @@ const displayAllCourses = async () => {
 
       const backgroundImage = courseOverlay();
       document.querySelector('#course-container').appendChild(backgroundImage);
+      backgroundImage.style.opacity = '0.05';
 
       document.querySelector('#card-container').appendChild(card);
     });

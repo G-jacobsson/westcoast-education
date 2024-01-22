@@ -7,9 +7,7 @@
       "birthDate": "1985-04-05",
       "email": "anna.andersson@mail.com",
       "phone": "070-3123456",
-      "courseId": [
-        103
-      ]
+      "courseId": [103]
     },
     {
       "firstName": "Peter",
@@ -18,10 +16,7 @@
       "birthDate": "1974-10-21",
       "email": "peter.frank@mail.com",
       "phone": "076-4987654",
-      "courseId": [
-        102,
-        104
-      ]
+      "courseId": [102, 104]
     },
     {
       "firstName": "Maria",
@@ -30,10 +25,7 @@
       "birthDate": "1990-01-18",
       "email": "maria.fryer@mail.com",
       "phone": "070-3123456",
-      "courseId": [
-        102,
-        105
-      ]
+      "courseId": [102, 105]
     }
   ],
   "teachers": [
@@ -43,10 +35,7 @@
       "id": "1",
       "email": "eric.j@westcoast.com",
       "phone": "076-2345678",
-      "courseId": [
-        101,
-        103
-      ]
+      "courseId": [101, 103]
     },
     {
       "firstName": "Angela",
@@ -54,9 +43,7 @@
       "id": "2",
       "email": "angela.g@westcoast.com",
       "phone": "073-6545576",
-      "courseId": [
-        102
-      ]
+      "courseId": [102]
     },
     {
       "firstName": "Imad",
@@ -64,10 +51,7 @@
       "id": "3",
       "email": "imad.h@westcoast.com",
       "phone": "070-2124699",
-      "courseId": [
-        104,
-        105
-      ]
+      "courseId": [104, 105]
     },
     {
       "firstName": "Beatrice",
@@ -75,9 +59,7 @@
       "id": "4",
       "email": "beatrice.c@westcoast.com",
       "phone": "070-6884522",
-      "courseId": [
-        106
-      ]
+      "courseId": [106]
     }
   ],
   "courses": [
@@ -309,13 +291,22 @@
   ],
   "users": [
     {
-      "id": "6de5",
+      "id": 1,
       "firstName": "David",
       "lastName": "Clingman",
       "billingAddress": "Fernando Street",
       "phoneNumber": "0762123456",
       "email": "david@mail.com",
       "password": "david456"
+    },
+    {
+      "id": 2,
+      "firstName": "Hanna",
+      "lastName": "Roxy",
+      "billingAddress": "Chicago Blvd. 1",
+      "phoneNumber": "0704987654",
+      "email": "hanna@mail.com",
+      "password": "hanna123"
     }
   ]
 }
