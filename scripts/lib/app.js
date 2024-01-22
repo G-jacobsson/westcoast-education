@@ -1,6 +1,7 @@
 import { state } from '../utilities/config.js';
 import Course from '../Models/Course.js';
 import HttpClient from './Http.js';
+import { pageBackgroundImage } from './domManager.js';
 import { formInputToJson } from '../utilities/config.js';
 
 const initApp = () => {
@@ -20,14 +21,20 @@ const initApp = () => {
       break;
     case '/pages/register.html':
       console.log('vi är i register delen nu');
-      initializeRegisterPage();
+      initRegisterPage();
       break;
     case '/pages/login.html':
       console.log('Vi är i login delen nu');
-      initializeLoginPage();
+      initLoginPage();
       break;
   }
 };
+
+/* ************************************************** */
+/* ************************************************** */
+/* ********************COURSES FUNCTIONS************* */
+/* ************************************************** */
+/* ************************************************** */
 
 const listPopularCourses = async () => {
   try {
@@ -35,7 +42,7 @@ const listPopularCourses = async () => {
     const result = await http.get('courses', '');
     console.log(result);
     displayPopularCourses(result);
-    const backgroundImage = courseOverlay();
+    const backgroundImage = pageBackgroundImage();
     document.querySelector('#index-container').appendChild(backgroundImage);
   } catch (error) {
     throw new Error('Error getting courses data:', error.message);
@@ -146,7 +153,7 @@ const displayAllCourses = async () => {
       cost.classList.add('course-text');
       bodyText.appendChild(cost);
 
-      const backgroundImage = courseOverlay();
+      const backgroundImage = pageBackgroundImage();
       document.querySelector('#course-container').appendChild(backgroundImage);
       backgroundImage.style.opacity = '0.05';
 
@@ -183,28 +190,30 @@ const showCourseDetails = async () => {
   console.log(courseId);
 
   const course = await findCourse(courseId);
-  const backgroundImage = courseOverlay();
+  const backgroundImage = pageBackgroundImage();
   document
     .querySelector('#course-details-container')
     .appendChild(backgroundImage);
   console.log(course);
 };
 
-const courseOverlay = () => {
-  const overlay = document.createElement('div');
-  overlay.style.backgroundImage = "url('/assets/images/background-image.jpg')";
-  overlay.style.backgroundSize = 'cover';
-  overlay.style.backgroundPosition = 'center';
-  overlay.style.backgroundRepeat = 'no-repeat';
-  overlay.style.height = '100vh';
-  overlay.style.width = '100vw';
-  overlay.style.position = 'fixed';
-  overlay.style.top = '0';
-  overlay.style.left = '0';
-  overlay.style.zIndex = '-1';
-  overlay.style.opacity = '0.3';
+/* ************************************************** */
+/* ************************************************** */
+/* ********************USER FUNCTIONS**************** */
+/* ************************************************** */
+/* ************************************************** */
 
-  return overlay;
+const getAllUsers = async () => {
+  console.log('getallusers called');
+  try {
+    const http = new HttpClient();
+    const response = await http.get('users', '');
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log('Error getting users in getAllUsers', error);
+    throw error;
+  }
 };
 
 const addUser = async (e) => {
@@ -235,9 +244,15 @@ const saveUser = async (user) => {
   location.href = '/';
 };
 
-const initializeRegisterPage = () => {
+/* ************************************************** */
+/* ************************************************** */
+/* **********REGISTER & LOGIN FUNCTIONS************** */
+/* ************************************************** */
+/* ************************************************** */
+
+const initRegisterPage = () => {
   const registerForm = document.querySelector('#register-form');
-  const backgroundImage = courseOverlay();
+  const backgroundImage = pageBackgroundImage();
   document.querySelector('.form-container').appendChild(backgroundImage);
   if (registerForm) {
     registerForm.addEventListener('submit', addUser);
@@ -247,10 +262,11 @@ const initializeRegisterPage = () => {
   }
 };
 
-const initializeLoginPage = () => {
+const initLoginPage = () => {
   const loginForm = document.querySelector('#login-form');
-  const backgroundImage = courseOverlay();
+  const backgroundImage = pageBackgroundImage();
   document.querySelector('.form-container').appendChild(backgroundImage);
+
   if (loginForm) {
     loginForm.addEventListener('submit', handleLogin);
     console.log('Login form event listener attached');
@@ -259,25 +275,44 @@ const initializeLoginPage = () => {
   }
 };
 
-const handleLogin = (e) => {
+const handleLogin = async (e) => {
   e.preventDefault();
 
-  const email = e.target.email.value;
-  const password = e.target.password.value;
+  const email = e.target.email.value.trim();
+  const password = e.target.password.value.trim();
 
-  const usersData = JSON.parse(localStorage.getItem('usersData')) || {
-    users: [],
-  };
-  console.log('Users in localStorage:', usersData.users);
-  const user = usersData.users.find(
-    (u) => u.email === email && u.password === password
-  );
-  if (user) {
-    location.href = '/pages/courses.html';
-    alert('Login Successful');
-  } else {
-    alert('Invalid email or password');
+  try {
+    let usersData = JSON.parse(localStorage.getItem('usersData'));
+    let user;
+    if (usersData && usersData.users) {
+      user = usersData.users.find(
+        (u) => u.email === email && u.password === password
+      );
+    }
+    if (!user) {
+      console.log('User not found in localStorage, checking db.json');
+      const users = await getAllUsers();
+      // console.log(users);
+      user = users.find((u) => u.email === email && u.password === password);
+    }
+
+    if (user) {
+      location.href = '/pages/courses.html';
+      alert('Login Successful');
+    } else {
+      alert('Invalid email or password');
+      location.href = '/pages/register.html';
+    }
+  } catch (error) {
+    console.log('Login error:', error);
+    alert('Login failed due to an error');
   }
 };
+
+/* ************************************************** */
+/* ************************************************** */
+/* ****************EVENT LISTENERS******************* */
+/* ************************************************** */
+/* ************************************************** */
 
 document.addEventListener('DOMContentLoaded', initApp);
