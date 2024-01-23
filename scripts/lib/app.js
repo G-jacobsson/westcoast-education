@@ -27,6 +27,10 @@ const initApp = () => {
       console.log('Vi är i login delen nu');
       initLoginPage();
       break;
+    case '/admin/add-course.html':
+      console.log('Vi är i add course delen nu');
+      initAddCoursePage();
+      break;
   }
 };
 
@@ -262,6 +266,18 @@ const initRegisterPage = () => {
   }
 };
 
+const initAddCoursePage = () => {
+  const addCourseForm = document.querySelector('#addCourse-form');
+  const backgroundImage = pageBackgroundImage();
+  document.querySelector('.form-container').appendChild(backgroundImage);
+
+  if (addCourseForm) {
+    addCourseForm.addEventListener('submit', addCourse);
+  } else {
+    console.log('Add course form not found');
+  }
+};
+
 const initLoginPage = () => {
   const loginForm = document.querySelector('#login-form');
   const backgroundImage = pageBackgroundImage();
@@ -273,6 +289,32 @@ const initLoginPage = () => {
   } else {
     console.log('Login form not found');
   }
+};
+
+const addCourse = async (e) => {
+  e.preventDefault();
+  console.log('Du är i addcourse');
+
+  const course = new FormData(e.target);
+  const courseObj = formInputToJson(course);
+
+  try {
+    await saveCourse(courseObj);
+  } catch (error) {
+    throw new Error('Error saving course', error);
+  }
+};
+
+const saveCourse = async (course) => {
+  const http = new HttpClient();
+  await http.add(course, 'courses');
+
+  const usersData = {
+    courses: [],
+  };
+  usersData.courses.push(course);
+
+  location.href = '/';
 };
 
 const handleLogin = async (e) => {

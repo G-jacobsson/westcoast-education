@@ -9,7 +9,7 @@
     <title>Westcoast Education | Registration</title>
     <script
       type="module"
-      src="./scripts/lib/app.js"
+      src="/scripts/lib/app.js"
       defer
     ></script>
   </head>
@@ -51,21 +51,30 @@
             />
           </div>
           <div class="form-control">
-            <label for="start-date">Start Date</label>
+            <label for="startDate">Start Date</label>
             <input
               type="text"
-              name="start-date"
-              id="start-date"
+              name="startDate"
+              id="startDate"
               placeholder="Enter course start date here"
             />
           </div>
           <div class="form-control">
-            <label for="end-date">End Date</label>
+            <label for="endDate">End Date</label>
             <input
               type="text"
-              name="end-date"
-              id="end-date"
+              name="endDate"
+              id="endDate"
               placeholder="Enter course end date here"
+            />
+          </div>
+          <div class="form-control">
+            <label for="cost">Cost</label>
+            <input
+              type="number"
+              name="cost"
+              id="cost"
+              placeholder="Enter course cost here"
             />
           </div>
           <div class="form-control">
@@ -77,15 +86,15 @@
               placeholder="Enter course description here"
             />
           </div>
+          <div class="form-control">
+            <button
+              type="submit"
+              id="btn-addCourse"
+            >
+              Add course
+            </button>
+          </div>
         </form>
-        <div class="form-control">
-          <button
-            type="submit"
-            id="btn-addCourse"
-          >
-            Add course
-          </button>
-        </div>
       </div>
     </main>
 
