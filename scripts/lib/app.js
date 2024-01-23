@@ -298,6 +298,10 @@ const addCourse = async (e) => {
   const course = new FormData(e.target);
   const courseObj = formInputToJson(course);
 
+  if (!courseObj.imageUrl || !courseObj.imageUrl.trim()) {
+    courseObj.imageUrl = '/assets/images/placeholder_course_image.jpeg';
+  }
+
   try {
     await saveCourse(courseObj);
   } catch (error) {
@@ -308,11 +312,6 @@ const addCourse = async (e) => {
 const saveCourse = async (course) => {
   const http = new HttpClient();
   await http.add(course, 'courses');
-
-  const usersData = {
-    courses: [],
-  };
-  usersData.courses.push(course);
 
   location.href = '/';
 };

@@ -52,4 +52,39 @@ export default class HttpClient {
       throw new Error(`Ett fel inträffade i add metoden: ${error}`);
     }
   }
+
+  async update(inputData, endpoint) {
+    try {
+      const endpoints = settings.ENDPOINTS[endpoint];
+      const url = `${this.baseUrl}/${endpoint}`;
+      const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(inputData),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        return result;
+      } else {
+        throw new Error(`${response.status} ${response.statusText}`);
+      }
+    } catch (error) {
+      throw new Error(`Ett fel inträffade i update metoden: ${error}`);
+    }
+  }
+
+  async delete(endpoints, id) {
+    try {
+      const endpoint = settings.ENDPOINTS[endpoints];
+      const url = `${this.baseUrl}${endpoint}${id ? `${id}` : ''}`;
+      const response = await fetch(url, {
+        method: 'DELETE',
+      });
+    } catch (error) {
+      throw new Error(`Ett fel inträffade i delete metoden: ${error}`);
+    }
+  }
 }

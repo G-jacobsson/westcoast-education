@@ -19,6 +19,7 @@
         <h1><a href="/index.html">Westcoast Education</a></h1>
         <nav>
           <ul>
+            <li><a href="/">Home</a></li>
             <li><a href="/pages/courses.html">Courses</a></li>
             <li><a href="/pages/register.html">Register</a></li>
             <li><a href="/pages/admin.html">Admin</a></li>
@@ -39,6 +40,24 @@
               name="title"
               id="title"
               placeholder="Enter course title here"
+            />
+          </div>
+          <div class="form-control">
+            <label for="description">Description</label>
+            <input
+              type="text"
+              name="description"
+              id="description"
+              placeholder="Enter course description here"
+            />
+          </div>
+          <div class="form-control">
+            <label for="imageUrl">Image Url</label>
+            <input
+              type="text"
+              name="imageUrl"
+              id="imageUrl"
+              placeholder="Enter image URL here"
             />
           </div>
           <div class="form-control">
@@ -69,6 +88,15 @@
             />
           </div>
           <div class="form-control">
+            <label for="prerequisites">Course prerequisites</label>
+            <input
+              type="text"
+              name="prerequisites"
+              id="prerequisites"
+              placeholder="Enter course prerequisites here"
+            />
+          </div>
+          <div class="form-control">
             <label for="cost">Cost</label>
             <input
               type="number"
@@ -78,14 +106,24 @@
             />
           </div>
           <div class="form-control">
-            <label for="description">Description</label>
+            <label for="rating">Rating</label>
             <input
-              type="text"
-              name="description"
-              id="description"
-              placeholder="Enter course description here"
+              type="number"
+              name="rating"
+              id="rating"
+              placeholder="Enter course raring here"
             />
           </div>
+          <div class="form-control">
+            <label for="status">Course status</label>
+            <input
+              type="text"
+              name="status"
+              id="status"
+              placeholder="Enter course status here"
+            />
+          </div>
+
           <div class="form-control">
             <button
               type="submit"
