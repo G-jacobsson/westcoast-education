@@ -266,18 +266,6 @@ const initRegisterPage = () => {
   }
 };
 
-const initAddCoursePage = () => {
-  const addCourseForm = document.querySelector('#addCourse-form');
-  const backgroundImage = pageBackgroundImage();
-  document.querySelector('.form-container').appendChild(backgroundImage);
-
-  if (addCourseForm) {
-    addCourseForm.addEventListener('submit', addCourse);
-  } else {
-    console.log('Add course form not found');
-  }
-};
-
 const initLoginPage = () => {
   const loginForm = document.querySelector('#login-form');
   const backgroundImage = pageBackgroundImage();
@@ -289,31 +277,6 @@ const initLoginPage = () => {
   } else {
     console.log('Login form not found');
   }
-};
-
-const addCourse = async (e) => {
-  e.preventDefault();
-  console.log('Du är i addcourse');
-
-  const course = new FormData(e.target);
-  const courseObj = formInputToJson(course);
-
-  if (!courseObj.imageUrl || !courseObj.imageUrl.trim()) {
-    courseObj.imageUrl = '/assets/images/placeholder_course_image.jpeg';
-  }
-
-  try {
-    await saveCourse(courseObj);
-  } catch (error) {
-    throw new Error('Error saving course', error);
-  }
-};
-
-const saveCourse = async (course) => {
-  const http = new HttpClient();
-  await http.add(course, 'courses');
-
-  location.href = '/';
 };
 
 const handleLogin = async (e) => {
@@ -352,8 +315,198 @@ const handleLogin = async (e) => {
 
 /* ************************************************** */
 /* ************************************************** */
+/* ****************ADMIN FUNCTIONS******************* */
+/* ************************************************** */
+/* ************************************************** */
+
+const initAddCoursePage = () => {
+  const addCourseForm = document.querySelector('#addCourse-form');
+  const backgroundImage = pageBackgroundImage();
+  document.querySelector('.form-container').appendChild(backgroundImage);
+
+  if (addCourseForm) {
+    addCourseForm.addEventListener('submit', addCourse);
+  } else {
+    console.log('Add course form not found');
+  }
+};
+
+const addCourse = async (e) => {
+  e.preventDefault();
+  console.log('Du är i addcourse');
+
+  const course = new FormData(e.target);
+  const courseObj = formInputToJson(course);
+
+  if (!courseObj.imageUrl || !courseObj.imageUrl.trim()) {
+    courseObj.imageUrl = '/assets/images/placeholder_course_image.jpeg';
+  }
+
+  try {
+    await saveCourse(courseObj);
+  } catch (error) {
+    throw new Error('Error saving course', error);
+  }
+};
+
+const saveCourse = async (course) => {
+  const http = new HttpClient();
+  await http.add(course, 'courses');
+
+  location.href = '/';
+};
+
+const editButton = document.querySelector('#edit-button');
+
+const handleEditButtonClick = () => {
+  const selectedOptions = document.querySelector(
+    'input[name="dataOption"]:checked'
+  ).value;
+  showEditForm(selectedOptions);
+};
+
+const showEditForm = (option) => {
+  const dataContainer = document.querySelector('#data-container');
+  dataContainer.innerHTML = getformHtml(option);
+
+  const editForm = document.querySelector('#editForm');
+  editForm.addEventListener('submit', handleUpdate);
+};
+
+let studentsFormFields = `
+<input type="hidden" name="id" value="" />
+    <input type="text" name="firstName" placeholder="First Name" required />
+    <input type="text" name="lastName" placeholder="Last Name" required />
+    <input type="date" name="birthDate" placeholder="Birth Date" required />
+    <input type="email" name="email" placeholder="Email" required />
+    <input type="text" name="phone" placeholder="Phone" required />
+    <input type="text" name="courseId" placeholder="Course ID (comma-separated for multiple)" />
+`;
+
+let teachersFormFields = `
+<input type="hidden" name="id" value="" />
+    <input type="text" name="firstName" placeholder="First Name" required />
+    <input type="text" name="lastName" placeholder="Last Name" required />
+    <input type="email" name="email" placeholder="Email" required />
+    <input type="text" name="phone" placeholder="Phone" required />
+    <input type="text" name="courseId" placeholder="Course ID (comma-separated for multiple)" />
+`;
+
+let coursesFormFields = `
+<input type="hidden" name="id" value="" />
+    <input type="text" name="title" placeholder="Title" required />
+    <textarea name="description" placeholder="Description" required></textarea>
+    <input type="text" name="imageUrl" placeholder="Image URL" />
+    <input type="text" name="teacher" placeholder="Teacher" required />
+    <input type="date" name="startDate" placeholder="Start Date" required />
+    <input type="date" name="endDate" placeholder="End Date" required />
+    <textarea name="prerequisites" placeholder="Prerequisites"></textarea>
+    <input type="number" name="cost" placeholder="Cost" required />
+    <input type="number" name="rating" placeholder="Rating" min="0" max="5" step="0.1" />
+    <input type="text" name="status" placeholder="Status" required />
+`;
+
+const getformHtml = (option) => {
+  let formFieldsHtml = '';
+
+  switch (option) {
+    case 'students':
+      // Add form fields for editing a student
+      formFieldsHtml = studentsFormFields;
+      break;
+    case 'teachers':
+      // Add form fields for editing a teacher
+      formFieldsHtml = teachersFormFields;
+      break;
+    case 'courses':
+      // Add form fields for editing a course
+      formFieldsHtml = coursesFormFields;
+      break;
+  }
+  return `
+  <h3>Edit ${option}</h3>
+  <form id="searchForm">
+  <input type="number" id="searchId" placeholder="Enter ID" required>
+  <button type="submit">Search</button>
+</form>
+
+<div id="editFormContainer">
+<form id="editForm">
+  <!-- The edit form will be populated here -->
+  ${formFieldsHtml}
+  <button type="submit" id="updateButton">Update</button>
+  </form>
+</div>
+
+  `;
+};
+
+function handleFormSubmit(e) {
+  if (e.target.id === 'searchForm') {
+    e.preventDefault();
+    const id = document.getElementById('searchId').value;
+    const dataType = document.querySelector(
+      'input[name="dataOption"]:checked'
+    ).value;
+    fetchDataById(dataType, id)
+      .then((data) => {
+        if (data) {
+          fillFormWithData(dataType, data);
+        } else {
+          console.log('No data found with the given ID');
+        }
+      })
+      .catch((error) => console.error('Error fetching data:', error));
+  }
+}
+
+async function fetchDataById(dataType, id) {
+  const response = await fetch(`http://localhost:3000/${dataType}/${id}`);
+  console.log(response);
+  if (response.ok) {
+    return response.json();
+  }
+  return null;
+}
+
+function fillFormWithData(dataType, data) {
+  // Assuming data keys match the form field names
+  for (const key in data) {
+    const input = document.querySelector(`#editFormContainer [name="${key}"]`);
+    if (input) {
+      input.value = data[key];
+    } else {
+      console.log(`Input not found for key: ${key}`);
+    }
+  }
+}
+
+const handleUpdate = async (e) => {
+  e.preventDefault();
+
+  const id = document.querySelector("#editForm input[name='id']").value;
+  const updatedData = formInputToJson(new FormData(e.target));
+  const dataType = document.querySelector(
+    'input[name="dataOption"]:checked'
+  ).value;
+
+  try {
+    const http = new HttpClient();
+    await http.update(updatedData, dataType, id);
+    alert('Data updated successfully');
+    // Optionally, refresh the data on the page or redirect
+  } catch (error) {
+    console.error('Error updating data:', error);
+    alert('Failed to update data');
+  }
+};
+
+/* ************************************************** */
+/* ************************************************** */
 /* ****************EVENT LISTENERS******************* */
 /* ************************************************** */
 /* ************************************************** */
 
 document.addEventListener('DOMContentLoaded', initApp);
+editButton.addEventListener('click', handleEditButtonClick);
+document.addEventListener('submit', handleFormSubmit);

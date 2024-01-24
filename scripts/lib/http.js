@@ -53,10 +53,9 @@ export default class HttpClient {
     }
   }
 
-  async update(inputData, endpoint) {
+  async update(inputData, endpoint, id) {
     try {
-      const endpoints = settings.ENDPOINTS[endpoint];
-      const url = `${this.baseUrl}/${endpoint}`;
+      const url = `${this.baseUrl}/${endpoint}/${id}`;
       const response = await fetch(url, {
         method: 'PUT',
         headers: {
