@@ -192,13 +192,42 @@ const findCourse = async (id) => {
 const showCourseDetails = async () => {
   const courseId = location.search.split('=')[1];
   console.log(courseId);
+  try {
+    const course = await findCourse(courseId);
+    const backgroundImage = pageBackgroundImage();
+    document
+      .querySelector('#course-details-container')
+      .appendChild(backgroundImage);
+    console.log(course);
 
-  const course = await findCourse(courseId);
-  const backgroundImage = pageBackgroundImage();
-  document
-    .querySelector('#course-details-container')
-    .appendChild(backgroundImage);
-  console.log(course);
+    const div = document.querySelector('#course-details-container');
+    const image = document.createElement('img');
+    image.src = course.imageUrl;
+    image.style.width = '50%';
+    div.appendChild(image);
+
+    const title = document.createElement('h2');
+    title.textContent = course.title;
+    div.appendChild(title);
+
+    const description = document.createElement('p');
+    description.textContent = course.description;
+    div.appendChild(description);
+
+    const cost = document.createElement('p');
+    cost.textContent = '$' + course.cost;
+    div.appendChild(cost);
+
+    const rating = document.createElement('p');
+    rating.textContent = course.rating;
+    div.appendChild(rating);
+
+    const bookButton = document.createElement('button');
+    bookButton.textContent = 'Book Course';
+    div.appendChild(bookButton);
+  } catch (error) {
+    throw new Error(error);
+  }
 };
 
 /* ************************************************** */
