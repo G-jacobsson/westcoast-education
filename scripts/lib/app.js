@@ -27,9 +27,19 @@ const initApp = () => {
       console.log('Vi är i login delen nu');
       initLoginPage();
       break;
+    case '/pages/admin.html':
+      const backgroundImage = pageBackgroundImage();
+      document.querySelector('#admin').appendChild(backgroundImage);
+      break;
     case '/admin/add-course.html':
       console.log('Vi är i add course delen nu');
       initAddCoursePage();
+      break;
+    case '/admin/admin-data.html':
+      handleEditButtonClick();
+      break;
+    case '/admin/enrollments.html':
+      searchAndDisplayEnrollments();
       break;
   }
 };
@@ -391,6 +401,8 @@ const handleEditButtonClick = () => {
   const selectedOptions = document.querySelector(
     'input[name="dataOption"]:checked'
   ).value;
+  const backgroundImage = pageBackgroundImage();
+  document.querySelector('#data-options').appendChild(backgroundImage);
   showEditForm(selectedOptions);
 };
 
@@ -530,6 +542,69 @@ const handleUpdate = async (e) => {
   }
 };
 
+const searchButton = document.querySelector('#btn-search');
+
+async function searchAndDisplayEnrollments() {
+  const backgroundImage = pageBackgroundImage();
+  document.querySelector('.search-container').appendChild(backgroundImage);
+  try {
+    // Get the user input for searching
+    const searchInput = document.querySelector('#searchInput').value;
+    console.log('Search input:', searchInput);
+    const http = new HttpClient();
+
+    // Make an HTTP GET request to search for the course
+    // Note: We use the 'courses' key from settings.ENDPOINTS to construct the URL
+    const courses = await http.get('courses', `?search=${searchInput}`);
+
+    if (!courses.length) {
+      console.log('No courses found');
+      return;
+    }
+
+    // Find the course that matches the search input (assuming searchInput is the course ID)
+    const searchedCourse = courses.find(
+      (course) => course.id.toString() === searchInput
+    );
+
+    if (!searchedCourse) {
+      console.log('Course not found');
+      return;
+    }
+
+    console.log('Course:', searchedCourse);
+
+    // Fetch enrollments for the found course
+    const enrollments = await http.get(
+      'enrollments',
+      `?courseId=${searchedCourse.id}`
+    );
+
+    console.log('Enrollments:', enrollments);
+    const resultsContainer = document.querySelector('#results-container');
+    resultsContainer.innerHTML = '';
+
+    // Create and append new elements for course
+    const courseElement = document.createElement('div');
+    courseElement.innerHTML = `<h2>${searchedCourse.title}</h2>`;
+    resultsContainer.appendChild(courseElement);
+
+    // Create and append elements for each enrollment
+    enrollments.forEach((enrollment) => {
+      const enrollmentDiv = document.createElement('div');
+      enrollmentDiv.innerHTML = `
+      <p>Student ID: ${enrollment.studentId}</p>
+      <p>Enrollment Date: ${enrollment.enrollmentDate}</p>
+      <p>Status: ${enrollment.status}</p>
+      `;
+      enrollmentDiv.id = 'enrollmentDiv';
+      resultsContainer.appendChild(enrollmentDiv);
+    });
+  } catch (error) {
+    console.error('Error searching for course:', error.message);
+  }
+}
+
 /* ************************************************** */
 /* ************************************************** */
 /* ****************EVENT LISTENERS******************* */
@@ -537,5 +612,10 @@ const handleUpdate = async (e) => {
 /* ************************************************** */
 
 document.addEventListener('DOMContentLoaded', initApp);
-editButton.addEventListener('click', handleEditButtonClick);
+if (searchButton) {
+  searchButton.addEventListener('click', searchAndDisplayEnrollments);
+}
+if (editButton) {
+  editButton.addEventListener('click', handleEditButtonClick);
+}
 document.addEventListener('submit', handleFormSubmit);
