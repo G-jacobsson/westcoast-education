@@ -126,20 +126,17 @@ const displayAllCourses = async () => {
 
       const card = document.createElement('div');
       card.classList.add('card');
-      card.style.backgroundColor = '#B2B2B2';
-      card.style.padding = '10px';
-      card.style.margin = '10px';
-      card.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
 
       const image = document.createElement('img');
       image.src = course.imageUrl;
       image.setAttribute('alt', course.title);
-      image.style.width = '50%';
+      image.style.width = '100%';
 
       link.appendChild(image);
       card.appendChild(link);
 
       const body = document.createElement('div');
+      body.classList.add('course-text');
       card.appendChild(body);
 
       const title = document.createElement('h4');
