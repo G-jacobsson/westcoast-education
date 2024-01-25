@@ -411,37 +411,58 @@ const showEditForm = (option) => {
   editForm.addEventListener('submit', handleUpdate);
 };
 
-let studentsFormFields = `
+let studentsFormFields = `<div class="admin-form">
 <input type="hidden" name="id" value="" />
+<label for="firstName">First Name</label>
     <input type="text" name="firstName" placeholder="First Name" required />
+    <label for="lastName">Last Name</label>
     <input type="text" name="lastName" placeholder="Last Name" required />
+    <label for="birthDate">Birth Date</label>
     <input type="date" name="birthDate" placeholder="Birth Date" required />
+    <label for="email">Email</label>
     <input type="email" name="email" placeholder="Email" required />
+    <label for="phone">Phone</label>
     <input type="text" name="phone" placeholder="Phone" required />
-    <input type="text" name="courseId" placeholder="Course ID (comma-separated for multiple)" />
+    <label for="courseId">Course ID</label>
+    <input type="text" name="courseId" placeholder="Course ID (comma-separated for multiple)" /></div>
 `;
 
-let teachersFormFields = `
+let teachersFormFields = `<div class="admin-form">
 <input type="hidden" name="id" value="" />
+<label for="firstName">First Name</label>
     <input type="text" name="firstName" placeholder="First Name" required />
+    <label for="lastName">Last Name</label>
     <input type="text" name="lastName" placeholder="Last Name" required />
+    <label for="email">Email</label>
     <input type="email" name="email" placeholder="Email" required />
+    <label for="phone">Phone</label>
     <input type="text" name="phone" placeholder="Phone" required />
-    <input type="text" name="courseId" placeholder="Course ID (comma-separated for multiple)" />
+    <label for="CourseId">Course ID</label>
+    <input type="text" name="courseId" placeholder="Course ID (comma-separated for multiple)" /></div>
 `;
 
-let coursesFormFields = `
+let coursesFormFields = `<div class="admin-form">
 <input type="hidden" name="id" value="" />
+<label for="title">Title</label>
     <input type="text" name="title" placeholder="Title" required />
+    <label for="description">Description</label>
     <textarea name="description" placeholder="Description" required></textarea>
+    <label for="imageUrl">Image Url</label>
     <input type="text" name="imageUrl" placeholder="Image URL" />
+    <label for="teacher">Teacher</label>
     <input type="text" name="teacher" placeholder="Teacher" required />
+    <label for="startDate">Start Date</label>
     <input type="date" name="startDate" placeholder="Start Date" required />
+    <label for="endDate">End Date</label>
     <input type="date" name="endDate" placeholder="End Date" required />
+    <label for="prerequisites">Prerequisites</label>
     <textarea name="prerequisites" placeholder="Prerequisites"></textarea>
+    <label for="cost">Cost</label>
     <input type="number" name="cost" placeholder="Cost" required />
+    <label for="rating">Rating</label>
     <input type="number" name="rating" placeholder="Rating" min="0" max="5" step="0.1" />
-    <input type="text" name="status" placeholder="Status" required />
+    <label for="status">Status</label>
+    <input type="text" name="status" placeholder="Status" required /></div>
 `;
 
 const getformHtml = (option) => {

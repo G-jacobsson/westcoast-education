@@ -11,6 +11,7 @@ body {
   display: flex;
   flex-direction: column;
   overscroll-behavior: none;
+  overflow-x: hidden;
 }
 
 main {
@@ -27,18 +28,16 @@ a {
   text-decoration: none;
 }
 
-header {
+.header-container {
   width: 100%;
   position: sticky;
   top: 0;
   z-index: 999;
-}
-
-.header-container {
   background-color: #ffffff;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-sizing: border-box;
 }
 
 header h1 {
@@ -102,7 +101,6 @@ ul li a {
 #spotlight,
 #contact {
   grid-column: 2;
-  top: 0;
   width: fit-content;
   height: fit-content;
 }
@@ -136,8 +134,8 @@ ul li a {
 
 #admin {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 40%;
+  left: 40%;
 }
 
 #card-container {
@@ -176,4 +174,104 @@ ul li a {
   margin: 10px;
   border: solid 1px black;
   border-radius: 10px;
+}
+
+.form-control {
+  margin-bottom: 15px;
+}
+
+.form-control label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-control input {
+  width: 100%;
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.admin-form input,
+.admin-form textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.admin-form textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+.admin-form label {
+  margin-top: 10px;
+}
+
+button {
+  appearance: button;
+  background-color: #1899d6;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: din-round, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  overflow: visible;
+  padding: 7px 10px;
+  text-align: center;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  transition: filter 0.2s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+button:after {
+  background-clip: padding-box;
+  background-color: #1cb0f6;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  bottom: -4px;
+  content: '';
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+button:main,
+button:focus {
+  user-select: auto;
+}
+
+button:hover:not(:disabled) {
+  filter: brightness(1.1);
+  -webkit-filter: brightness(1.1);
+}
+
+button:disabled {
+  cursor: auto;
+}
+
+button:active {
+  border-width: 4px 0 0;
+  background: none;
 }
