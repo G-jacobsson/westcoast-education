@@ -144,6 +144,7 @@
   ],
   "enrollments": [
     {
+      "id": 201,
       "studentId": 1,
       "courseId": 103,
       "enrollmentDate": "2023-05-25",
@@ -173,6 +174,7 @@
       ]
     },
     {
+      "id": 202,
       "studentId": 2,
       "courseId": 102,
       "enrollmentDate": "2023-06-28",
@@ -202,6 +204,7 @@
       ]
     },
     {
+      "id": 203,
       "studentId": 2,
       "courseId": 104,
       "enrollmentDate": "2023-12-14",
@@ -226,6 +229,7 @@
       ]
     },
     {
+      "id": 204,
       "studentId": 3,
       "courseId": 102,
       "enrollmentDate": "2023-07-03",
@@ -255,6 +259,7 @@
       ]
     },
     {
+      "id": 205,
       "studentId": 3,
       "courseId": 105,
       "enrollmentDate": "2024-01-08",
@@ -286,7 +291,7 @@
   ],
   "users": [
     {
-      "id": 1,
+      "id": 4,
       "firstName": "David",
       "lastName": "Clingman",
       "billingAddress": "Fernando Street",
@@ -295,7 +300,7 @@
       "password": "david456"
     },
     {
-      "id": 2,
+      "id": 5,
       "firstName": "Hanna",
       "lastName": "Roxy",
       "billingAddress": "Chicago Blvd. 1",

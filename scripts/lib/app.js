@@ -196,6 +196,7 @@ const findCourse = async (id) => {
     throw error;
   }
 };
+
 const showCourseDetails = async () => {
   const courseId = location.search.split('=')[1];
   console.log(courseId);
@@ -231,11 +232,41 @@ const showCourseDetails = async () => {
 
     const bookButton = document.createElement('button');
     bookButton.textContent = 'Book Course';
+    bookButton.id = 'bookBtn';
     div.appendChild(bookButton);
+    bookButton.addEventListener('click', () => enrollInCourse(courseId));
   } catch (error) {
     throw new Error(error);
   }
 };
+
+async function enrollInCourse(courseId) {
+  const httpClient = new HttpClient();
+  const user = getLoggedInUser();
+
+  if (!user) {
+    alert('Please log in to book a course');
+    location.href = '/pages/login.html';
+    return;
+  }
+
+  const students = await httpClient.get('students');
+  const isStudent = students.some((student) => student.id === user.id);
+
+  if (!isStudent) {
+    await httpClient.add(user, 'students');
+  }
+
+  const enrollment = {
+    studentId: user.id,
+    courseId: courseId,
+    enrollmentDate: new Date().toISOString(),
+  };
+
+  await httpClient.add(enrollment, 'enrollments');
+
+  alert('You have successfully enrolled in the course!');
+}
 
 /* ************************************************** */
 /* ************************************************** */
@@ -281,6 +312,30 @@ const saveUser = async (user) => {
   usersData.users.push(user);
   localStorage.setItem('usersData', JSON.stringify(usersData));
 
+  location.href = '/';
+};
+
+const getLoggedInUser = () => {
+  const userJson = localStorage.getItem('loggedInUser');
+  return userJson ? JSON.parse(userJson) : null;
+};
+
+const updateLoginLink = () => {
+  const loginLink = document.querySelector('#loginLink');
+  if (getLoggedInUser()) {
+    loginLink.textContent = 'Log out';
+    loginLink.href = '#';
+    loginLink.addEventListener('click', handleLogout);
+  } else {
+    loginLink.textContent = 'Log in';
+    loginLink.href = '/pages/login.html';
+    loginLink.removeEventListener('click', handleLogout);
+  }
+};
+
+const handleLogout = () => {
+  localStorage.removeItem('loggedInUser');
+  updateLoginLink();
   location.href = '/';
 };
 
@@ -337,6 +392,13 @@ const handleLogin = async (e) => {
     }
 
     if (user) {
+      usersData = usersData || { users: [] };
+      usersData.users.push(user);
+      localStorage.setItem('usersData', JSON.stringify(usersData));
+    }
+
+    if (user) {
+      localStorage.setItem('loggedInUser', JSON.stringify(user));
       location.href = '/pages/courses.html';
       alert('Login Successful');
     } else {
@@ -529,7 +591,6 @@ async function fetchDataById(dataType, id) {
 }
 
 function fillFormWithData(dataType, data) {
-  // Assuming data keys match the form field names
   for (const key in data) {
     const input = document.querySelector(`#editFormContainer [name="${key}"]`);
     if (input) {
@@ -629,7 +690,10 @@ async function searchAndDisplayEnrollments() {
 /* ************************************************** */
 /* ************************************************** */
 
-document.addEventListener('DOMContentLoaded', initApp);
+document.addEventListener('DOMContentLoaded', () => {
+  initApp();
+  updateLoginLink();
+});
 if (searchButton) {
   searchButton.addEventListener('click', searchAndDisplayEnrollments);
 }
