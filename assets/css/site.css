@@ -78,13 +78,16 @@ ul li a {
 
 .container {
   background-color: #ffffff;
-  border: solid 1px black;
+  /* border: solid 1px black; */
   border-radius: 10px;
   display: inline-block;
   padding: 10px;
   margin: 10px;
   color: #424242;
   width: fit-content;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
 #index-container {
@@ -108,6 +111,32 @@ ul li a {
 #spotlight-courses {
   margin: 0 auto;
   width: 50%;
+}
+
+#spotlight-courses img {
+  border: 8px solid;
+  border-image: repeating-linear-gradient(
+      135deg,
+      #00cff8 0 10px,
+      #3eabfe 0 20px,
+      #02d9ff 0 30px
+    )
+    8;
+  -webkit-mask: conic-gradient(
+        from 180deg at top 8px right 8px,
+        #0000 90deg,
+        #000 0
+      )
+      var(--_i, 200%) 0 /200% var(--_i, 8px) border-box no-repeat,
+    conic-gradient(at bottom 8px left 8px, #0000 90deg, #000 0) 0
+      var(--_i, 200%) / var(--_i, 8px) 200% border-box no-repeat,
+    linear-gradient(#000 0 0) padding-box no-repeat;
+  transition: 0.3s, -webkit-mask-position 0.3s 0.3s;
+}
+#spotlight-courses img:hover {
+  --_i: 100%;
+  color: #1a91f2;
+  transition: 0.3s, -webkit-mask-size 0.3s 0.3s;
 }
 
 #course-container {
@@ -149,13 +178,16 @@ ul li a {
   display: grid;
   grid-template-columns: 1fr 1fr;
   background-color: #ffffff;
-  border: solid 1px black;
+  /* border: solid 1px black; */
   border-radius: 10px;
   padding: 10px;
   margin-bottom: 20px;
   width: 100%;
   max-width: 500px;
   gap: 10px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
 .course-text {
@@ -178,6 +210,7 @@ ul li a {
 
 .form-control {
   margin-bottom: 15px;
+  width: 50%;
 }
 
 .form-control label {
@@ -192,7 +225,7 @@ ul li a {
 .admin-form {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 50%;
 }
 
 .admin-form input,
@@ -229,7 +262,7 @@ button {
   margin: 0;
   outline: none;
   overflow: visible;
-  padding: 7px 10px;
+  padding: 5px 8px;
   text-align: center;
   text-transform: uppercase;
   touch-action: manipulation;
