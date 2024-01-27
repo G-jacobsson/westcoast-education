@@ -1,7 +1,6 @@
 import { state } from '../utilities/config.js';
 import Course from '../Models/Course.js';
 import HttpClient from './Http.js';
-import { pageBackgroundImage } from './domManager.js';
 import { formInputToJson } from '../utilities/config.js';
 
 const initApp = () => {
@@ -26,10 +25,6 @@ const initApp = () => {
     case '/pages/login.html':
       console.log('Vi är i login delen nu');
       initLoginPage();
-      break;
-    case '/pages/admin.html':
-      const backgroundImage = pageBackgroundImage();
-      document.querySelector('#admin').appendChild(backgroundImage);
       break;
     case '/admin/add-course.html':
       console.log('Vi är i add course delen nu');
@@ -56,8 +51,6 @@ const listPopularCourses = async () => {
     const result = await http.get('courses', '');
     console.log(result);
     displayPopularCourses(result);
-    const backgroundImage = pageBackgroundImage();
-    document.querySelector('#index-container').appendChild(backgroundImage);
   } catch (error) {
     throw new Error('Error getting courses data:', error.message);
   }
@@ -164,10 +157,6 @@ const displayAllCourses = async () => {
       cost.classList.add('course-text');
       bodyText.appendChild(cost);
 
-      const backgroundImage = pageBackgroundImage();
-      document.querySelector('#course-container').appendChild(backgroundImage);
-      backgroundImage.style.opacity = '0.05';
-
       document.querySelector('#card-container').appendChild(card);
     });
   } catch (error) {
@@ -202,10 +191,6 @@ const showCourseDetails = async () => {
   console.log(courseId);
   try {
     const course = await findCourse(courseId);
-    const backgroundImage = pageBackgroundImage();
-    document
-      .querySelector('#course-details-container')
-      .appendChild(backgroundImage);
     console.log(course);
 
     const div = document.querySelector('#course-details-container');
@@ -347,8 +332,7 @@ const handleLogout = () => {
 
 const initRegisterPage = () => {
   const registerForm = document.querySelector('#register-form');
-  const backgroundImage = pageBackgroundImage();
-  document.querySelector('.form-container').appendChild(backgroundImage);
+
   if (registerForm) {
     registerForm.addEventListener('submit', addUser);
     console.log('Register form event listener attached');
@@ -359,8 +343,6 @@ const initRegisterPage = () => {
 
 const initLoginPage = () => {
   const loginForm = document.querySelector('#login-form');
-  const backgroundImage = pageBackgroundImage();
-  document.querySelector('.form-container').appendChild(backgroundImage);
 
   if (loginForm) {
     loginForm.addEventListener('submit', handleLogin);
@@ -419,8 +401,6 @@ const handleLogin = async (e) => {
 
 const initAddCoursePage = () => {
   const addCourseForm = document.querySelector('#addCourse-form');
-  const backgroundImage = pageBackgroundImage();
-  document.querySelector('.form-container').appendChild(backgroundImage);
 
   if (addCourseForm) {
     addCourseForm.addEventListener('submit', addCourse);
@@ -460,8 +440,7 @@ const handleEditButtonClick = () => {
   const selectedOptions = document.querySelector(
     'input[name="dataOption"]:checked'
   ).value;
-  const backgroundImage = pageBackgroundImage();
-  document.querySelector('#data-options').appendChild(backgroundImage);
+
   showEditForm(selectedOptions);
 };
 
@@ -624,8 +603,6 @@ const handleUpdate = async (e) => {
 const searchButton = document.querySelector('#btn-search');
 
 async function searchAndDisplayEnrollments() {
-  const backgroundImage = pageBackgroundImage();
-  document.querySelector('.search-container').appendChild(backgroundImage);
   try {
     // Get the user input for searching
     const searchInput = document.querySelector('#searchInput').value;
@@ -653,7 +630,6 @@ async function searchAndDisplayEnrollments() {
 
     console.log('Course:', searchedCourse);
 
-    // Fetch enrollments for the found course
     const enrollments = await http.get(
       'enrollments',
       `?courseId=${searchedCourse.id}`

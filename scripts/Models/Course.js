@@ -1,5 +1,3 @@
-import { settings } from '../utilities/config.js';
-
 export default class Course {
   #id = 0;
   #imageUrl = '';
