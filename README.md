@@ -12,20 +12,22 @@ What things you need to install the software and how to install them:
 
 - **Node.js and npm**: You must have Node.js and npm installed on your computer. If you don't have them installed, you can download them from [here](https://nodejs.org/).
 
-- **JSON Server**: This project uses JSON Server to simulate a REST API. You can install it globally via npm: `bash 
-npm install -g json-server`
+- **JSON Server**: This project uses JSON Server to simulate a REST API. You can install it globally via npm:
+  npm install -g json-server
 
 ### Installing
 
 A step-by-step series of examples that tell you how to get a development environment running:
 
-1. Clone the repository to your local machine: ``` git clone https://github.com/G-jacobsson/westcoast-education
+1. Clone the repository to your local machine: git clone https://github.com/G-jacobsson/westcoast-education
+2. Navigate to the project directory: ``` 
+`cd westcoast-education``
 
-2. Navigate to the project directory: ``` cd westcoast-education
+3. Install the necessary npm packages: ``` 
+`npm install``
 
-3. Install the necessary npm packages: ``` npm install
-
-4. Start JSON Server to watch the `db.json` file: ``` json-server --watch db.json
+4. Start JSON Server to watch the `db.json` file:
+   `json-server --watch db.json``
 
 This will host your database on a local server, typically at `http://localhost:3000`.
 
