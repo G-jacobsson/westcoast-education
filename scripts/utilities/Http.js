@@ -1,4 +1,4 @@
-import { settings } from '../utilities/config.js';
+import { settings } from './config.js';
 
 export default class HttpClient {
   constructor() {
