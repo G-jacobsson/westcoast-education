@@ -19,13 +19,13 @@ npm install -g json-server`
 
 A step-by-step series of examples that tell you how to get a development environment running:
 
-1. Clone the repository to your local machine: git clone https://github.com/G-jacobsson/westcoast-education
+1. Clone the repository to your local machine: ``` git clone https://github.com/G-jacobsson/westcoast-education
 
-2. Navigate to the project directory: cd westcoast-education
+2. Navigate to the project directory: ``` cd westcoast-education
 
-3. Install the necessary npm packages: npm install
+3. Install the necessary npm packages: ``` npm install
 
-4. Start JSON Server to watch the `db.json` file: json-server --watch db.json
+4. Start JSON Server to watch the `db.json` file: ``` json-server --watch db.json
 
 This will host your database on a local server, typically at `http://localhost:3000`.
 
