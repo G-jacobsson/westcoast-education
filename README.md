@@ -12,7 +12,7 @@ What things you need to install the software and how to install them:
 
 - **Node.js and npm**: You must have Node.js and npm installed on your computer. If you don't have them installed, you can download them from [here](https://nodejs.org/).
 
-- **JSON Server**: This project uses JSON Server to simulate a REST API. You can install it globally via npm: npm install -g json-server
+- **JSON Server**: This project uses JSON Server to simulate a REST API. You can install it globally via npm: ```bash npm install -g json-server
 
 ### Installing
 
