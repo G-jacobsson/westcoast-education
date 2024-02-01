@@ -7,7 +7,7 @@
       "birthDate": "1985-04-05",
       "email": "ann.andersson@mail.com",
       "phone": "070-3123410",
-      "courseId": "103"
+      "courseId": 103
     },
     {
       "id": 2,
@@ -72,8 +72,8 @@
       "startDate": "2024-02-12",
       "endDate": "2024-05-24",
       "prerequisites": "No prior experience in blockchain or programming is required. A basic understanding of computer science and a curiosity about emerging technologies will enhance your learning experience.",
-      "cost": 2000,
-      "rating": 4,
+      "cost": "2000",
+      "rating": "4",
       "status": "Open for Enrollment"
     },
     {
