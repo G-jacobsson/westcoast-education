@@ -16,7 +16,10 @@
       "birthDate": "1974-10-21",
       "email": "peter.frank@mail.com",
       "phone": "076-4987654",
-      "courseId": [102, 104]
+      "courseId": [
+        102,
+        104
+      ]
     },
     {
       "id": 3,
@@ -25,7 +28,10 @@
       "birthDate": "1990-01-18",
       "email": "maria.fryer@mail.com",
       "phone": "070-3123456",
-      "courseId": [102, 105]
+      "courseId": [
+        102,
+        105
+      ]
     }
   ],
   "teachers": [
@@ -35,7 +41,10 @@
       "lastName": "Johnson",
       "email": "eric.j@westcoast.com",
       "phone": "076-2345678",
-      "courseId": [101, 103]
+      "courseId": [
+        101,
+        103
+      ]
     },
     {
       "id": 2,
@@ -51,7 +60,10 @@
       "lastName": "Hassan",
       "email": "imad.h@westcoast.com",
       "phone": "070-2124699",
-      "courseId": [104, 105]
+      "courseId": [
+        104,
+        105
+      ]
     },
     {
       "id": 4,
@@ -59,7 +71,9 @@
       "lastName": "Clint",
       "email": "beatrice.c@westcoast.com",
       "phone": "070-6884522",
-      "courseId": [106]
+      "courseId": [
+        106
+      ]
     }
   ],
   "courses": [
@@ -73,7 +87,7 @@
       "endDate": "2024-05-24",
       "prerequisites": "No prior experience in blockchain or programming is required. A basic understanding of computer science and a curiosity about emerging technologies will enhance your learning experience.",
       "cost": "2000",
-      "rating": "4",
+      "rating": "3",
       "status": "Open for Enrollment"
     },
     {

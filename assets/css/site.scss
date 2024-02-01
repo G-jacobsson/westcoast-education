@@ -60,7 +60,7 @@ a {
 
 @media (max-width: 480px) {
   h1 {
-    font-size: 1rem;
+    font-size: 1.3rem;
   }
 
   .header-container {
@@ -78,12 +78,16 @@ a {
   }
 
   .container {
-    font-size: 1rem;
     width: fit-content;
   }
+  .container p,
+  .container h2,
+  .container h4 {
+    font-size: 0.8rem;
+  }
 
-  #spotlight-courses img {
-    width: 120px !important;
+  .popular-course img {
+    width: 100px !important;
   }
 
   #admin {
