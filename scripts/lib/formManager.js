@@ -157,51 +157,61 @@ export const searchButton = document.querySelector('#btn-search');
 
 export async function searchAndDisplayEnrollments() {
   try {
-    const searchInput = document.querySelector('#searchInput').value;
-    console.log('Search input:', searchInput);
+    const searchInput = document
+      .querySelector('#searchInput')
+      .value.toLowerCase();
+    const selectedOption = document.querySelector('#statusFilter').value;
+    console.log(
+      'Search input:',
+      searchInput,
+      'Selected Option:',
+      selectedOption
+    );
     const http = new HttpClient();
 
     const courses = await http.get('courses', `?search=${searchInput}`);
-
     if (!courses.length) {
       console.log('No courses found');
       return;
     }
 
-    const searchedCourse = courses.find(
-      (course) => course.id.toString() === searchInput
-    );
-
-    if (!searchedCourse) {
-      console.log('Course not found');
-      return;
-    }
-
-    console.log('Course:', searchedCourse);
-
-    const enrollments = await http.get(
-      'enrollments',
-      `?courseId=${searchedCourse.id}`
-    );
-
-    console.log('Enrollments:', enrollments);
     const resultsContainer = document.querySelector('#results-container');
-    resultsContainer.innerHTML = '';
+    resultsContainer.innerHTML = ''; // Clear existing content
 
-    const courseElement = document.createElement('div');
-    courseElement.innerHTML = `<h2>${searchedCourse.title}</h2>`;
-    resultsContainer.appendChild(courseElement);
+    for (const course of courses.filter((course) =>
+      course.title.toLowerCase().includes(searchInput)
+    )) {
+      console.log('Course:', course);
 
-    enrollments.forEach((enrollment) => {
-      const enrollmentDiv = document.createElement('div');
-      enrollmentDiv.innerHTML = `
-        <p>Student ID: ${enrollment.studentId}</p>
-        <p>Enrollment Date: ${enrollment.enrollmentDate}</p>
-        <p>Status: ${enrollment.status}</p>
-        `;
-      enrollmentDiv.id = 'enrollmentDiv';
-      resultsContainer.appendChild(enrollmentDiv);
-    });
+      const enrollments = await http.get(
+        'enrollments',
+        `?courseId=${course.id}`
+      );
+      console.log('Enrollments:', enrollments);
+
+      const filteredEnrollments = enrollments.filter(
+        (enrollment) =>
+          selectedOption === 'All' ||
+          enrollment.status.toLowerCase() === selectedOption.toLowerCase()
+      );
+
+      if (filteredEnrollments.length) {
+        const courseElement = document.createElement('div');
+        courseElement.innerHTML = `<h2>${course.title}</h2>`;
+        resultsContainer.appendChild(courseElement);
+
+        filteredEnrollments.forEach((enrollment) => {
+          const enrollmentDiv = document.createElement('div');
+          enrollmentDiv.innerHTML = `
+            <p>Student ID: ${enrollment.studentId}</p>
+            <p>Enrollment Date: ${enrollment.enrollmentDate}</p>
+            <p>Status: ${enrollment.status}</p>
+          `;
+          enrollmentDiv.id = 'enrollmentDiv';
+          resultsContainer.appendChild(enrollmentDiv);
+        });
+      }
+    }
   } catch (error) {
     console.error('Error searching for course:', error.message);
   }

@@ -47,12 +47,6 @@ const initApp = () => {
       console.log('Vi är i add course delen nu');
       initAddCoursePage();
       break;
-    case '/admin/admin-data.html':
-      handleEditButtonClick();
-      break;
-    case '/admin/enrollments.html':
-      searchAndDisplayEnrollments();
-      break;
   }
 };
 
