@@ -1,4 +1,4 @@
-import Course from '../Models/Course.js';
+import Course from '../../dist/Models/Course.js';
 import HttpClient from '../utilities/Http.js';
 import { getLoggedInUser } from './userManager.js';
 

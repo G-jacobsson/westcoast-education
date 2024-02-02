@@ -1,22 +1,22 @@
 export default class Course {
-  #id = 0;
-  #imageUrl = '';
-  #title = '';
-  #startDate = '';
-  #endDate = '';
-  #cost = '';
-  #description = '';
-  #rating = 5;
+  #id: number;
+  #imageUrl: string;
+  #title: string;
+  #startDate: string;
+  #endDate: string;
+  #cost: string;
+  #description: string;
+  #rating: number;
 
   constructor(
-    id,
-    imageUrl,
-    title,
-    startDate,
-    endDate,
-    cost,
-    description,
-    rating
+    id: number,
+    imageUrl: string,
+    title: string,
+    startDate: string,
+    endDate: string,
+    cost: string,
+    description: string,
+    rating: number
   ) {
     this.#id = id;
     this.#imageUrl = imageUrl;
@@ -28,28 +28,28 @@ export default class Course {
     this.#rating = rating;
   }
 
-  get id() {
+  get id(): number {
     return this.#id;
   }
-  get imageUrl() {
+  get imageUrl(): string {
     return this.#imageUrl;
   }
-  get title() {
+  get title(): string {
     return this.#title;
   }
-  get startDate() {
+  get startDate(): string {
     return this.#startDate;
   }
-  get endDate() {
+  get endDate(): string {
     return this.#endDate;
   }
-  get cost() {
+  get cost(): string {
     return this.#cost;
   }
-  get description() {
+  get description(): string {
     return this.#description;
   }
-  get rating() {
+  get rating(): string {
     return this.#rating.toFixed(1) + ' / 5';
   }
 }
