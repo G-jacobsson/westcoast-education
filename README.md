@@ -27,7 +27,7 @@ A step-by-step series of examples that tell you how to get a development environ
    `npm install`
 
 4. Start JSON Server to watch the `db.json` file:
-   `json-server --watch db.json`
+   `json-server --watch db.json` or `npx json-server --watch db.json` or simply `npm run server`
 
 This will host your database on a local server, typically at `http://localhost:3000`.
 
